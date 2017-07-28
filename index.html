@@ -502,11 +502,6 @@
       </section>
 
       <section>
-        <h3>Create working directory</h3>
-        <pre><code contenteditable="">mkdir led && cd led</code></pre>
-      </section>
-
-      <section>
         <pre><code>npm install johnny-five tessel-io</code></pre>
         <img src="assets/sgier-johnny-five.png">
       </section>
@@ -601,7 +596,7 @@ var board = new five.Board({
 });
 
 board.on("ready", function() {
-  var button = new five.Button("A0");
+  var button = new five.Button("A2");
 
   button.on("press", function() { console.log("Button Pressed!")});
   button.on("release", function() { console.log("Button Released!")});
@@ -623,13 +618,13 @@ var board = new five.Board({
 
 board.on("ready", function() {
   var led = new five.Led("A5");
-  var button = new five.Button("A0");
+  var button = new five.Button("A2");
 
   button.on("press", function() { led.on() });
   button.on("release", function() { led.off() });
 });
 </code></pre>
-        <pre><code>t2 run button.js</code></pre>
+        <pre><code>t2 run button-led.js</code></pre>
       </section>
 
       <section>
@@ -642,14 +637,14 @@ var board = new five.Board({
 
 board.on("ready", function() {
   var led = new five.Led("A5");
-  var button = new five.Button("A0");
+  var button = new five.Button("A2");
 
   button.on("press", function() { led.on() });
   button.on("hold", function() { led.blink(50) });
   button.on("release", function() { led.stop().off() });
 });
 </code></pre>
-        <pre><code>t2 run button.js</code></pre>
+        <pre><code>t2 run button-states.js</code></pre>
       </section>
 
       <section>
@@ -680,7 +675,7 @@ var board = new five.Board({
 });
 
 board.on("ready", function() {
-  var rotary = new five.Sensor("B0");
+  var rotary = new five.Sensor("A7");
 
   rotary.on("change", function() {
     console.log("Sensor changed!", this.value);
@@ -707,6 +702,48 @@ board.on("ready", function() {
       </section>
 
       <section>
+        <h3>Working with Analog Data</h3>
+        <pre><code contenteditable="" class="javascript">var Barcli = require("barcli");
+var five = require("johnny-five");
+
+var Tessel = require("tessel-io");
+var board = new five.Board({
+  io: new Tessel()
+});
+
+board.on("ready", function() {
+  var range = [0, 1024];
+  var graph = new Barcli({
+    label: "Potentiometer",
+    range: range,
+  });
+  var rotary = new five.Sensor("A7");
+
+  rotary.scale(0, 1024).on("change", function() {
+    graph.update(this.value);
+  });
+});
+</code></pre>
+        <pre><code>t2 run barcli.js</code></pre>
+      </section>
+
+      <section>
+        <h2>PWM</h2>
+        <p>
+          Pulse Width Modulation, or PWM, is a technique for getting analog results with digital means. <br>Digital control
+          is used to create a square wave, a signal switched between on and off. <br> - Arduino.cc
+        </p>
+        <img src="assets/pwm_duty_cycle.gif" alt="">
+
+
+      </section>
+
+      <section>
+        <img src="assets/pwm.gif" style="width: 400px;background-color:#ffffff">
+      </section>
+
+      <section>
+        <h3>Control the brightness</h3>
         <pre class="stretch"><code class="javascript">var five = require("johnny-five");
 var Tessel = require("tessel-io");
 var board = new five.Board({
@@ -724,48 +761,16 @@ board.on("ready", function() {
     led.brightness(sensor.scaleTo(0, 255));
   });
 });</code></pre>
+<pre><code>t2 run brightness.js</code></pre>
       </section>
 
       <section>
-        <h3>Working with Analog Data</h3>
-        <pre><code contenteditable="" class="javascript">var Barcli = require("barcli");
-var five = require("johnny-five");
-
-var Tessel = require("tessel-io");
-var board = new five.Board({
-  io: new Tessel()
-});
-
-board.on("ready", function() {
-  var range = [0, 1024];
-  var graph = new Barcli({
-    label: "Potentiometer",
-    range: range,
-  });
-  var rotary = new five.Sensor("B0");
-
-  rotary.scale(0, 1024).on("change", function() {
-    graph.update(this.value);
-  });
-});
-</code></pre>
-        <pre><code>t2 run sensor.js</code></pre>
+        <h3>Let's get untethered</h3>
+<pre><code>t2 push brightness.js</code></pre>
+<p>Unplug the Tessel from your computer and plug it into the USB battery. Wait for the lights on the Ethernet port.</p>
       </section>
 
-      <section>
-        <h2>PWM</h2>
-        <p>
-          Pulse Width Modulation, or PWM, is a technique for getting analog results with digital means. <br>Digital control
-          is used to create a square wave, a signal switched between on and off. <br> - Arduino.cc
-        </p>
-        <img src="assets/pwm_duty_cycle.gif" alt="">
-
-
-      </section>
-
-      <section>
-        <img src="assets/pwm.gif" style="width: 400px;background-color:#ffffff">
-      </section>
+      
 
       <section>
         <h2>
