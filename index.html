@@ -1,0 +1,829 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+  <title>NodeBots Day 2017</title>
+
+  <link rel="stylesheet" href="css/reveal.css">
+  <link rel="stylesheet" href="css/theme/black.css">
+  <link rel="stylesheet" href="css/nodebots.css">
+
+  <!-- Theme used for syntax highlighting of code -->
+  <link rel="stylesheet" href="lib/css/zenburn.css">
+
+  <!-- Printing and PDF exports -->
+  <script>
+    var link = document.createElement('link');
+    link.rel = 'stylesheet';
+    link.type = 'text/css';
+    link.href = window.location.search.match(/print-pdf/gi) ? 'css/print/pdf.css' : 'css/print/paper.css';
+    document.getElementsByTagName('head')[0].appendChild(link);
+  </script>
+</head>
+
+<body>
+  <div class="reveal">
+    <div class="slides">
+
+      <section>
+        <a href="assets/nodebot-450x450.png" target="_blank">
+          <img src="assets/nodebot-450x450.png" style="width: 450px">
+        </a>
+
+        <h3><a href="http://nodebots.io/" target="_blank" >nodebots.io</a></h3>
+        <script>
+          // Delicously hacky. Look away.
+          if (navigator.userAgent.match(/(iPhone|iPad|iPod|Android)/i)) document.write('<p style="color: rgba(0,0,0,0.3); text-shadow: none;">(' + 'Tap to navigate' + ')</p>');
+        </script>
+      </section>
+
+      <section>
+        <a href="assets/sgier-johnny-five.png" target="_blank">
+          <a href="http://johnny-five.io/" target="_blank"><img src="assets/sgier-johnny-five.png" style="width: 450px"></a>
+        </a>
+
+        <h3><a href="http://johnny-five.io/" target="_blank" >johnny-five.io</a></h3>
+
+      </section>
+
+
+      <section>
+        <h2>Follow Along</h2>
+        <a href="https://ryanjgill.github.io/nbd2017/" target="_blank">https://ryanjgill.github.io/nbd2017/</a>
+      </section>
+
+      <section>
+        <h4>Alan Lee</h4>
+        <h4>Binu Panicker</h4>
+        <h4>Donovan Buck</h4>
+        <h4>Michelle Wigington</h4>
+        <h4>Pierce Primm</h4>
+        <h4>Ryan Gill</h4>
+      </section>
+
+      <section>
+        <h2>
+          Important Points<br> To Consider
+        </h2>
+      </section>
+
+      <section>
+        <h2>
+          The only dumb question is the one you never asked.
+        </h2>
+      </section>
+
+      <section>
+        <h2>
+          Doesn't work? <br> It's probably the hardware.
+        </h2>
+      </section>
+
+      <section>
+        <h2>Overview</h2>
+        <ul>
+          <li>Tessel 2</li>
+          <li>T2 CLI</li>
+          <li>Tessel Experiments</li>
+          <li>Build a NodeBot</li>
+        </ul>
+      </section>
+
+      <section>
+         <section>
+          <h3>Tessel 2</h3>
+          <div class="stretch">
+            <a href="assets/tessel.png" target="_blank">
+              <img src="assets/tessel.png">
+            </a>
+          </div>
+        </section>
+        <section>
+					<h4>Hardware Specs</h4>
+					<table class="specs">
+						<thead>
+							<tbody>
+								<tr>
+									<td>CPU</td>
+									<td>MIPS 24KEc 580MHz</td>
+								</tr>
+								<tr>
+									<td>RAM</td>
+									<td>64MB</td>
+								</tr>
+								<tr>
+									<td>Flash</td>
+									<td>32MB</td>
+								</tr>
+								<tr>
+									<td>WiFi</td>
+									<td>b/g/n 2.4GHz</td>
+								</tr>
+								<tr>
+									<td>Ethernet</td>
+									<td>10/100Mbps</td>
+								</tr>
+								<tr>
+									<td>USB</td>
+									<td>2 x USB 2.0</td>
+								</tr>
+								<tr>
+									<td>MCU</td>
+									<td>ARM Cortex M0 48MHz</td>
+								</tr>
+							</tbody>
+					</table>
+        </section>
+         <section>
+          <h2>The Tessel Mission</h2>
+          <p>Create a fully open source hardware & software platform that makes it easy and intuitive to develop Internet-connected devices.</p>
+        </section>
+        <section>
+          <h2>Core Philosophies</h2>
+          <ul>
+            <li>Developer experience is paramount</li>
+            <li>Device design should focus on user experience rather than on implementation</li>
+            <li>Openness promotes innovation</li>
+            <li>Tessel should be practical to use</li>
+            <li>Community matters</li>
+          </ul>
+        </section>
+      </section>
+
+      <section>
+        <h2>Getting started with the Tessel</h2>
+        <div class="stretch">
+          <img src="assets/tessel_logo.png" alt="Tessel Logo" class="bg-transparent no-border">
+        </div>
+      </section>
+
+      <section>
+        <h2>Install Tessel CLI</h2>
+        <pre><code contenteditable="" class="javascript">npm install -g t2-cli</code></pre>
+        <p class="note">Note: If you get the common npm EACCES error, correct it by fixing npm permissions and run the command again.
+          <br>
+          <br>
+          <a href="https://docs.npmjs.com/getting-started/fixing-npm-permissions">
+            https://docs.npmjs.com/getting-started/fixing-npm-permissions
+          </a>
+        </p>
+      </section>
+
+      <section>
+        <h2>
+          Connect The Tessel to your computer via USB
+        </h2>
+      </section>
+
+      <section>
+        <h2>Find your Tessel</h2>
+        <pre><code contenteditable="" class="javascript">t2 list</code></pre>
+      </section>
+
+      <section>
+        <h2>Name your Tessel</h2>
+        <pre><code contenteditable="" class="javascript">t2 rename mario</code></pre>
+      </section>
+
+      <section>
+        <h2>Authorize</h2>
+        <pre><code contenteditable="" class="javascript">t2 provision</code></pre>
+      </section>
+
+      <section>
+        <h3>Create working directory</h3>
+        <pre><code contenteditable="">mkdir t2_fun && cd t2_fun</code></pre>
+        <image src="assets/mkdir.gif" class="stretch"/>
+      </section>
+      
+      <section>
+        <h3>Initialize project</h3>
+        <pre><code class="javascript">t2 init</code></pre>
+        <image src="assets/t2_init.gif" class="stretch"/>
+      </section>
+
+
+      <section>
+        <section>
+          <h3>Run a file</h3>
+          <pre><code contenteditable="">t2 run index.js</code></pre>
+          <image src="assets/t2_run.gif" class="stretch"/>
+        </section>
+        <section>
+          <pre><code>t2 run name_of_file</code></pre>
+          <p class="note">Copy the file and its
+            dependencies into Tessel's RAM & run immediately. Use this during
+            development of your device application.
+          </p>
+          <table class="flag_details">
+            <thead>
+              <tr>
+                <th>Flag</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>--lan</td>
+                <td>deploy over LAN connection</td>
+              </tr>
+              <tr>
+                <td>--usb</td>
+                <td>deploy over USB connection</td>
+              </tr>
+              <tr>
+                <td>--slim</td>
+                <td>copy only files needed by the program to run</td>
+              </tr>
+              <tr>
+                <td>--full</td>
+                <td>copy all the files in the project directory</td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+      </section>
+      
+      <section>
+        <section>
+          <h3>Push a file</h3>
+          <pre><code contenteditable="">t2 push index.js</code></pre>
+          <img src="assets/t2_push.gif" class="stretch"/>
+        </section>
+        <section>
+          <pre><code>t2 push name_of_file</code></pre>
+          <p class="note">Copy the file and its dependencies into Tessel's Flash 
+            memory & run immediately. Once deployed with <span class="hljs inline hljs-keyword">push</span> command, the device 
+            application will automatically run every time the Tessel restarts.
+          </p>
+          <table class="flag_details">
+            <thead>
+              <tr>
+                <th>Flag</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>--lan</td>
+                <td>deploy over LAN connection</td>
+              </tr>
+              <tr>
+                <td>--usb</td>
+                <td>deploy over USB connection</td>
+              </tr>
+              <tr>
+                <td>--slim</td>
+                <td>copy only files needed by the program to run</td>
+              </tr>
+              <tr>
+                <td>--full</td>
+                <td>copy all the files in the project directory</td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+      </section>
+      
+      <section>
+        <section>
+          <h3>Erase Files</h3>
+          <pre><code contenteditable="">t2 erase</code></pre>
+          <image src="assets/t2_erase.gif" class="stretch"/>
+        </section>
+        <section>
+          <pre><code>t2 erase</code></pre>
+          <p>Erase any code previously pushed to the Tessel using 
+            the <span class="hljs inline"> t2 </span>
+            <span class="hljs inline hljs-keyword"> push</span> command.
+          </p>
+        </section>
+      </section>
+
+      <section>
+        <section>
+          <h3>Using Wifi</h3>
+          <pre><code contenteditable="">t2 wifi</code></pre>
+          <image src="assets/t2_wifi.gif" class="stretch"/>
+        </section>
+        <section>
+          <pre><code>t2 wifi -n SSID -p PASSWORD</code></pre>
+          <table class="flag_details">
+            <thead>
+              <tr>
+                <th>Flag</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>-l</td>
+                <td>list available networks</td>
+              </tr>
+              <tr>
+                <td>-n</td>
+                <td>network SSID</td>
+              </tr>
+              <tr>
+                <td>-p</td>
+                <td>password for wifi</td>
+              </tr>
+              <tr>
+                <td>-s</td>
+                <td>security type (wep, psk, psk2 wpa, wpa2)</td>
+              </tr>
+              <tr>
+                <td>--off</td>
+                <td>disconnect from wifi</td>
+              </tr>
+              <tr>
+                <td>--on</td>
+                <td>connect to last configured network</td>
+              </tr>
+            </tbody>
+          </table>
+          <p class="note">NOTE: try turning off access point before connecting to wifi. 
+            <pre><code>t2 ap --off</code></pre>
+          </p>
+        </section>
+      </section>
+      
+      <section>
+        <section>
+          <h3>Create An Access Point</h3>
+          <pre><code contenteditable="">t2 ap -n NAME -p PASSWORD</code></pre>
+          <image src="assets/t2_ap.gif" class="stretch"/>
+        </section>
+        <section>
+          <pre><code>t2 ap -n SSID -p PASSWORD</code></pre>
+          <table class="flag_details">
+            <thead>
+              <tr>
+                <th>Flag</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>-n</td>
+                <td>name of network to create</td>
+              </tr>
+              <tr>
+                <td>-p</td>
+                <td>optional password for network</td>
+              </tr>
+              <tr>
+                <td>-s</td>
+                <td>optional security type (wep, psk, psk2 wpa, wpa2)</td>
+              </tr>
+              <tr>
+                <td>--off</td>
+                <td>turn off current access point</td>
+              </tr>
+              <tr>
+                <td>--on</td>
+                <td>turn on most recent access point</td>
+              </tr>
+            </tbody>
+          </table>
+          <p class="note">NOTE: try turning off wifi before creating access point. 
+            <pre><code>t2 wifi --off</code></pre>
+          </p>
+        </section>
+      </section>
+
+      <section>
+        <h2>Let's learn about your</h2>
+        <h2><span class="jf-yellow">NBD Houston</span></h2>
+        <h2>Starter Kit!</h2>
+      </section>
+
+      <section>
+        <h3>Tessel 2</h3>
+        <div class="stretch">
+          <a href="assets/tessel.png" target="_blank">
+            <img src="assets/tessel.png">
+          </a>
+        </div>
+      </section>
+
+      <section>
+        <h3>Breadboard: Solderless wiring</h3>
+        <div class="stretch">
+          <img src="assets/kit-001.jpg"/>
+        </div> 
+      </section>
+
+      <section>
+        <h3>Breadboard: Electrical Connections</h3>
+        <div class="stretch">
+          <img src="assets/breadboard-conections.jpg"/>
+        </div>
+      </section>
+
+      <section>
+        <h3>Resistors: Reduce Current Flow, lower Voltage Level</h3>
+        <div class="stretch">
+          <img src="assets/kit-007.jpg"/>
+        </div>
+      </section>
+
+      <section>
+        <h3>LEDs: Light Up Your Life</h3>
+        <div class="stretch">
+          <img src="assets/kit-008.jpg"/>
+        </div>
+      </section>
+
+      <section>
+        <h3>Buttons, Potentiometer</h3>
+        <div class="stretch">
+          <img src="assets/kit-010.jpg"/>
+        </div>
+      </section>
+
+      <section>
+        <h3>Jumper Wires!</h3>
+        <div class="stretch">
+          <img src="assets/kit-020.jpg">
+        </div>
+      </section>
+
+
+      <section>
+        <h2>Ready To Make Stuff?</h2>
+      </section>
+
+      <section>
+        <h2>Create Output</h2>
+      </section>
+
+      <section>
+        <h3>Create working directory</h3>
+        <pre><code contenteditable="">mkdir led && cd led</code></pre>
+      </section>
+
+      <section>
+        <pre><code>npm install johnny-five tessel-io</code></pre>
+        <img src="assets/sgier-johnny-five.png">
+      </section>
+
+      <section>
+        <h3>Make a new file</h3>
+        <p class="note">Mac users:</p>
+        <pre><code>touch led-on.js</code></pre>
+        <p class="note">Windows users:</p>
+        <pre><code>type nul > led-on.js</code></pre>
+      </section>
+
+      <section>
+        <p>Connect positive lead (long) to pin A0 and the negative lead (short) to ground.</p>
+        <div class="stretch">
+          <img src="assets/tessel-led-blink.png">
+        </div>
+      </section>
+
+      <section>
+        <h2>Turn LED on</h2>
+        <pre><code contenteditable="" class="javascript">var five = require("johnny-five");
+var Tessel = require("tessel-io");
+var board = new five.Board({
+  io: new Tessel()
+});
+
+board.on("ready", function() {
+  var led = new five.Led("A0");
+  led.on();
+});
+</code></pre>
+        <pre><code>t2 run led-on.js</code></pre>
+        <h4>
+          <a href="http://johnny-five.io/api/board" target="_blank" class="roll">http://johnny-five.io/api/board</a><br>
+          <a href="http://johnny-five.io/api/led" target="_blank" class="roll">http://johnny-five.io/api/led</a>
+        </h4>
+      </section>
+
+      <section>
+        <h2>Make LED blink</h2>
+        <pre><code contenteditable="" class="javascript">var five = require("johnny-five");
+var Tessel = require("tessel-io");
+var board = new five.Board({
+  io: new Tessel()
+});
+
+board.on("ready", function() {
+  var led = new five.Led("A0");
+  led.blink();
+});
+</code></pre>
+        <pre><code>t2 run led-blink.js</code></pre>
+      </section>
+
+      <section>
+        <h2>Change the blink rate.</h2>
+        <pre><code contenteditable="" class="javascript">var five = require("johnny-five");
+var Tessel = require("tessel-io");
+var board = new five.Board({
+  io: new Tessel()
+});
+
+board.on("ready", function() {
+  var led = new five.Led("A0");
+  led.blink(2500); // <-- ms on/off phases
+});
+</code></pre>
+        <pre><code>t2 run led-blink-slow.js</code></pre>
+      </section>
+
+      <section>
+        <h2>Create Digital Input</h2>
+        <h2>0|1</h2>
+      </section>
+
+      <section>
+        <br><br>
+        <div class="stretch">
+          <a href="assets/tessel_button_led.png" target="_blank">
+            <img src="assets/tessel_button_led.png" style="width: 800px">
+          </a>
+        </div>
+      </section>
+
+      <section>
+        <h2>Respond to Button Press</h2>
+        <pre><code contenteditable="" class="javascript">var five = require("johnny-five");
+var Tessel = require("tessel-io");
+var board = new five.Board({
+  io: new Tessel()
+});
+
+board.on("ready", function() {
+  var button = new five.Button("A0");
+
+  button.on("press", function() { console.log("Button Pressed!")});
+  button.on("release", function() { console.log("Button Released!")});
+});
+</code></pre>
+        <pre><code>t2 run button.js</code></pre>
+        <h4>
+          <a href="http://johnny-five.io/api/button" target="_blank" class="roll"><span data-title="http://johnny-five.io/api/button">http://johnny-five.io/api/button</span></a>
+        </h4>
+      </section>
+
+      <section>
+        <h2>Convert Input to Output</h2>
+        <pre><code contenteditable="" class="javascript">var five = require("johnny-five");
+var Tessel = require("tessel-io");
+var board = new five.Board({
+  io: new Tessel()
+});
+
+board.on("ready", function() {
+  var led = new five.Led("A5");
+  var button = new five.Button("A0");
+
+  button.on("press", function() { led.on() });
+  button.on("release", function() { led.off() });
+});
+</code></pre>
+        <pre><code>t2 run button.js</code></pre>
+      </section>
+
+      <section>
+        <h3>Multiple States of Input to Multiple States of Output</h3>
+        <pre><code contenteditable="" class="php">var five = require("johnny-five");
+var Tessel = require("tessel-io");
+var board = new five.Board({
+  io: new Tessel()
+});
+
+board.on("ready", function() {
+  var led = new five.Led("A5");
+  var button = new five.Button("A0");
+
+  button.on("press", function() { led.on() });
+  button.on("hold", function() { led.blink(50) });
+  button.on("release", function() { led.stop().off() });
+});
+</code></pre>
+        <pre><code>t2 run button.js</code></pre>
+      </section>
+
+      <section>
+        <h3>
+          Observe Analog Input
+        </h3>
+        <h4>Tessel 2 analog in pins:</h4>
+        <ul>
+          <li>A4, A7</li>
+          <li>B0 - B7</li>
+        </ul>
+      </section>
+
+      <section>
+        <h3>Variable Input</h3>
+        <div class="stretch">
+          <img src="assets/tessel_potentiometer.png">
+        </div>
+        
+      </section>
+
+      <section>
+        <h3>Receive Values From a Sensor</h3>
+        <pre><code contenteditable="" class="javascript">var five = require("johnny-five");
+var Tessel = require("tessel-io");
+var board = new five.Board({
+  io: new Tessel()
+});
+
+board.on("ready", function() {
+  var rotary = new five.Sensor("B0");
+
+  rotary.on("change", function() {
+    console.log("Sensor changed!", this.value);
+  });
+});
+</code></pre>
+        <pre><code>t2 run sensor.js</code></pre>
+        <h4>
+          <a href="http://johnny-five.io/api/sensor" target="_blank" class="roll"><span data-title="http://johnny-five.io/api/sensor">http://johnny-five.io/api/sensor</span></a>
+        </h4>
+
+      </section>
+
+      <section>
+        <pre class="stretch"><code class="javascript">var five = require("johnny-five");
+var Tessel = require("tessel-io");
+var board = new five.Board({
+  io: new Tessel()
+});
+
+board.on("ready", function() {
+  var sensor = new five.Sensor({
+    pin: "a7",
+    threshold: 2
+  });
+  var led = new five.Led("b5");
+
+  sensor.on("change", () => {
+    led.brightness(sensor.scaleTo(0, 255));
+  });
+});</code></pre>
+      </section>
+
+      <section>
+        <br><br><br>
+        <h2><code>
+            npm install barcli
+        </code></h2>
+        <h4>(say: barklee)</h4>
+        <h4>
+          <a href="https://github.com/dtex/barcli" target="_blank" class="roll"><span data-title="https://github.com/dtex/barcli">https://github.com/dtex/barcli</span></a>
+        </h4>
+
+      </section>
+
+      <section>
+        <h3>Analog Data</h3>
+        <pre><code contenteditable="" class="javascript">var Barcli = require("barcli");
+var five = require("johnny-five");
+
+var Tessel = require("tessel-io");
+var board = new five.Board({
+  io: new Tessel()
+});
+
+board.on("ready", function() {
+  var range = [0, 1024];
+  var graph = new Barcli({
+    label: "Potentiometer",
+    range: range,
+  });
+  var rotary = new five.Sensor("B0");
+
+  rotary.scale(0, 1024).on("change", function() {
+    graph.update(this.value);
+  });
+});
+</code></pre>
+        <pre><code>t2 run sensor.js</code></pre>
+      </section>
+
+      <section>
+        <h2>PWM</h2>
+        <p>
+          Pulse Width Modulation, or PWM, is a technique for getting analog results with digital means. <br>Digital control
+          is used to create a square wave, a signal switched between on and off. <br> - Arduino.cc
+        </p>
+        <img src="assets/pwm_duty_cycle.gif" alt="">
+        
+
+      </section>
+
+      <section>
+        <img src="assets/pwm.gif" style="width: 400px;background-color:#ffffff">
+      </section>
+
+      <section>
+        <h2>
+          Break
+        </h2>
+      </section>
+
+      <section>
+        <h2>
+          Let's Build A Robot
+        </h2>
+      </section>
+
+      <section>
+        <img src="assets/peewee_bot.jpg" style="width: 600px">
+      </section>
+
+      <section>
+        <img src="assets/peewee_bot_parts.jpg" style="width: 600px">
+      </section>
+
+      <section>
+        <img src="assets/peewee_bot_front_view.jpg" style="width: 600px">
+      </section>
+
+      <section>
+        <img src="assets/peewee_bot_side_view.jpg" style="width: 600px">
+      </section>
+
+      <section>
+        <h3>Wiring</h3>
+        <div class="stretch">
+          <img src="assets/runt-rover-wiring.png"/>
+        </div>
+      </section>
+
+     
+      <section class="future" style="display: block;">
+        <h2>In Case of Emergency!</h2>
+        
+      </section>
+
+      <section>
+        <a href="assets/sgier-johnny-five.png" target="_blank">
+          <a href="http://johnny-five.io/" target="_blank"><img src="assets/sgier-johnny-five.png" style="width: 450px"></a>
+        </a>
+
+        <h3><a href="http://johnny-five.io/" target="_blank" >johnny-five.io</a></h3>
+
+      </section>
+
+      <section class="future" style="display: block;">
+        <h2>Let's get ready to race!!!</h2>
+      </section>
+
+      <section class="future" style="display: block;">
+        <h2>Additional Resources</h2>
+        <ul>
+          <li>
+            <a href="http://johnny-five.io/">Johnny-Five.io</a>
+          </li>
+          <li>
+            <a href="https://nodejshouston.github.io/bots/">NodeBots Day Houston</a>
+          </li>
+          <li>
+            <a href="https://learn.sparkfun.com/tutorials/experiment-guide-for-the-johnny-five-inventors-kit/all">SparkFun Inentors Guide</a>
+          </li>
+          <li>
+            <a href="https://tessel.gitbooks.io/t2-docs/content/">Tessel Docs</a>
+          </li>
+          <li>
+            <a href="https://tessel.io/modules#tessel-modules">Tessel Modules</a>
+          </li>
+
+         
+        </ul>
+      </section>
+
+    </div>
+  </div>
+
+  <script src="lib/js/head.min.js"></script>
+  <script src="js/reveal.js"></script>
+
+  <script>
+            // More info https://github.com/hakimel/reveal.js#configuration
+            Reveal.initialize({
+              history: true,
+
+              // More info https://github.com/hakimel/reveal.js#dependencies
+              dependencies: [
+                { src: 'plugin/markdown/marked.js' },
+                { src: 'plugin/markdown/markdown.js' },
+                { src: 'plugin/notes/notes.js', async: true },
+                { src: 'plugin/highlight/highlight.js', async: true, callback: function () { hljs.initHighlightingOnLoad(); } }
+              ]
+            });
+  </script>
+</body>
+
+</html>
