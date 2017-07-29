@@ -719,44 +719,6 @@ board.on("ready", function() {
       </section>
 
       <section>
-        <img src="assets/barcli.png" width="300"/>
-        <h2><code>
-            npm install barcli
-        </code></h2>
-        <h4>(say: barklee)</h4>
-        <h4>
-          <a href="https://github.com/dtex/barcli" target="_blank" class="roll"><span data-title="https://github.com/dtex/barcli">https://github.com/dtex/barcli</span></a>
-        </h4>
-
-      </section>
-
-      <section>
-        <h3>Working with Analog Data</h3>
-        <pre><code contenteditable="" class="javascript">var Barcli = require("barcli");
-var five = require("johnny-five");
-
-var Tessel = require("tessel-io");
-var board = new five.Board({
-  io: new Tessel()
-});
-
-board.on("ready", function() {
-  var range = [0, 1024];
-  var graph = new Barcli({
-    label: "Potentiometer",
-    range: range,
-  });
-  var rotary = new five.Sensor("A7");
-
-  rotary.scale(0, 1024).on("change", function() {
-    graph.update(this.value);
-  });
-});
-</code></pre>
-        <pre><code>t2 run barcli.js</code></pre>
-      </section>
-
-      <section>
         <h2>PWM</h2>
         <p>
           Pulse Width Modulation, or PWM, is a technique for getting analog results with digital means. <br>Digital control
