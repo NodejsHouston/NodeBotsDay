@@ -250,6 +250,30 @@
       </section>
 
       <section>
+        <section>
+          <h2>Open Terminal (Mac)</h2>
+          <pre><code contenteditable="" class="javascript">Applications --> Utilities --> Terminal</code></pre>
+          <div class="stretch">
+            <img src="assets/terminal_mac_1.png" alt="Tessel Logo" class="bg-transparent no-border">
+          </div>
+        </section>
+        <section>
+          <h2>Terminal</h2>
+          <div class="stretch">
+            <img src="assets/terminal_mac_2.png" alt="Tessel Logo" class="bg-transparent no-border">
+          </div>
+        </section>
+
+        <section>
+          <h2>Open Command Prompt (Windows)</h2>
+          <pre><code contenteditable="" class="javascript">Click start --> type `command prompt` --> hit enter</code></pre>
+          <div class="stretch">
+            <img src="assets/command_prompt.png" alt="Utilities" class="bg-transparent no-border">
+          </div>
+        </section>
+      </section>
+      
+      <section>
         <h2>Check your node.js version</h2>
         <pre><code contenteditable="" class="javascript">node -v</code></pre>
         <p class="note">6.11.1 is the latest, but any LTS Version should work</p>
@@ -609,6 +633,11 @@ board.on("ready", function() {
       </section>
 
       <section>
+        <h3>Let's try Push</h3>
+        <p>Instead of the <b style="text-decoration: underline">run</b> command, we will use the <b style="text-decoration: underline">push</b> command which copies the file on to the tessel and will now run this file at boot on every startup.</p>
+      </section>
+
+      <section>
         <h2>Convert Input to Output</h2>
         <pre><code contenteditable="" class="javascript">var five = require("johnny-five");
 var Tessel = require("tessel-io");
@@ -624,7 +653,7 @@ board.on("ready", function() {
   button.on("release", function() { led.off() });
 });
 </code></pre>
-        <pre><code>t2 run button-led.js</code></pre>
+        <pre><code>t2 push button-led.js</code></pre>
       </section>
 
       <section>
@@ -644,7 +673,7 @@ board.on("ready", function() {
   button.on("release", function() { led.stop().off() });
 });
 </code></pre>
-        <pre><code>t2 run button-states.js</code></pre>
+        <pre><code>t2 push button-states.js</code></pre>
       </section>
 
       <section>
@@ -795,6 +824,11 @@ board.on("ready", function() {
       </section>
 
       <section>
+        <h2>Peewee Bot Build Video</h2>
+        <iframe class="stretch" src="https://www.youtube.com/embed/OjxLEaO_az0"></iframe>
+      </section>
+
+      <section>
         <h2>
           Break
         </h2>
@@ -804,6 +838,20 @@ board.on("ready", function() {
         <h3>Wiring</h3>
         <div class="stretch">
           <img src="assets/runt-rover-wiring.png"/>
+        </div>
+      </section>
+
+      <section>
+        <h3>High Level Hardware</h3>
+        <div class="stretch">
+          <img style="border: 0" src="assets/Tessel_Top_Level.png"/>
+        </div>
+      </section>
+
+      <section>
+        <h3>High Level App</h3>
+        <div class="stretch">
+          <img style="border: 0"  src="assets/Node_App.png"/>
         </div>
       </section>
 
@@ -829,6 +877,9 @@ board.on("ready", function() {
       <section class="future" style="display: block;">
         <h2>Additional Resources</h2>
         <ul>
+          <li>
+            <a href="https://github.com/ryanjgill/tessel_tank">Bot Code</a>
+          </li>
           <li>
             <a href="http://johnny-five.io/">Johnny-Five.io</a>
           </li>
